@@ -51,9 +51,9 @@ else
       program="solana-$program"
     fi
 
-    if [[ -n $NDEBUG ]]; then
-      maybe_release=--release
-    fi
+#    if [[ -n $NDEBUG ]]; then
+#      maybe_release=--release
+#    fi
     printf "$program"
 #    # Prebuild binaries so that CI sanity check timeout doesn't include build time
 #    if [[ $prebuild ]]; then
