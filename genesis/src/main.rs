@@ -250,7 +250,7 @@ fn add_validator_accounts(
         stake_lamports,
         rent.minimum_balance(StakeStateV2::size_of()),
     )?;
-
+    let mut leader_pubkey = true;
     loop {
         let Some(identity_pubkey) = pubkeys_iter.next() else {
             break;
@@ -278,9 +278,10 @@ fn add_validator_accounts(
                 vote_pubkey,
                 &vote_account,
                 rent,
-                stake_lamports,
+                if leader_pubkey {stake_lamports*2} else {stake_lamports},
             ),
         );
+        leader_pubkey = false;
         genesis_config.add_account(*vote_pubkey, vote_account);
     }
     Ok(())
